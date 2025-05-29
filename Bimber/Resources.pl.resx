@@ -117,4 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApiKeyLabel" xml:space="preserve">
+    <value>Klucz API</value>
+  </data>
+  <data name="AppTitle" xml:space="preserve">
+    <value>Bimber</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Wyłącz</value>
+  </data>
+  <data name="exitToolStripMenuItem" xml:space="preserve">
+    <value>Wyłącz</value>
+  </data>
+  <data name="HotkeyLabel" xml:space="preserve">
+    <value>Skrót klawiszowy</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Zapisz</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
+  <data name="settingsToolStripMenuItem" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
+  <data name="StartWithWindows" xml:space="preserve">
+    <value>Uruchamiaj przy starcie systemu</value>
+  </data>
 </root>
