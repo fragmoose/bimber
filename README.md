@@ -30,9 +30,6 @@ Contributions are welcome! If you have suggestions for improvements or new featu
 
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
-## Contact
-
-For any inquiries or support, please reach out to [your-email@example.com].
 
 ---
 
