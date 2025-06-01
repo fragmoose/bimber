@@ -46,8 +46,8 @@
             hotkeyButton = new Button();
             languageComboBox = new ComboBox();
             languageLabel = new Label();
-            saveBtn = new Button();
-            cancelBtn = new Button();
+            SaveBtn = new Button();
+            CancelBtn = new Button();
             hotkeyLabel = new Label();
             SuspendLayout();
             // 
@@ -85,6 +85,7 @@
             hotkeyButton.TabIndex = 3;
             hotkeyButton.Text = "Hotkey";
             hotkeyButton.UseVisualStyleBackColor = true;
+            hotkeyButton.Click += hotkeyButton_Click;
             // 
             // languageComboBox
             // 
@@ -103,23 +104,25 @@
             languageLabel.TabIndex = 1;
             languageLabel.Text = "Language";
             // 
-            // saveBtn
+            // SaveBtn
             // 
-            saveBtn.Location = new Point(12, 118);
-            saveBtn.Name = "saveBtn";
-            saveBtn.Size = new Size(75, 23);
-            saveBtn.TabIndex = 5;
-            saveBtn.Text = "Save";
-            saveBtn.UseVisualStyleBackColor = true;
+            SaveBtn.Location = new Point(12, 118);
+            SaveBtn.Name = "SaveBtn";
+            SaveBtn.Size = new Size(75, 23);
+            SaveBtn.TabIndex = 5;
+            SaveBtn.Text = "Save";
+            SaveBtn.UseVisualStyleBackColor = true;
+            SaveBtn.Click += SaveBtn_Click;
             // 
-            // cancelBtn
+            // CancelBtn
             // 
-            cancelBtn.Location = new Point(130, 118);
-            cancelBtn.Name = "cancelBtn";
-            cancelBtn.Size = new Size(75, 23);
-            cancelBtn.TabIndex = 6;
-            cancelBtn.Text = "Cancel";
-            cancelBtn.UseVisualStyleBackColor = true;
+            CancelBtn.Location = new Point(130, 118);
+            CancelBtn.Name = "CancelBtn";
+            CancelBtn.Size = new Size(75, 23);
+            CancelBtn.TabIndex = 6;
+            CancelBtn.Text = "Cancel";
+            CancelBtn.UseVisualStyleBackColor = true;
+            CancelBtn.Click += CancelBtn_Click;
             // 
             // hotkeyLabel
             // 
@@ -135,8 +138,8 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(223, 158);
-            Controls.Add(cancelBtn);
-            Controls.Add(saveBtn);
+            Controls.Add(CancelBtn);
+            Controls.Add(SaveBtn);
             Controls.Add(languageComboBox);
             Controls.Add(hotkeyButton);
             Controls.Add(startWithWindowsCheckBox);
@@ -160,8 +163,8 @@
         private Button hotkeyButton;
         private ComboBox languageComboBox;
         private Label languageLabel;
-        private Button saveBtn;
-        private Button cancelBtn;
+        private Button SaveBtn;
+        private Button CancelBtn;
         private Label hotkeyLabel;
     }
 }

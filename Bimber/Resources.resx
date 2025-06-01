@@ -135,8 +135,26 @@
   <data name="HotkeyLabel" xml:space="preserve">
     <value>Hotkey</value>
   </data>
+  <data name="HotkeyPrompt" xml:space="preserve">
+    <value>Press the keys...</value>
+  </data>
+  <data name="labelLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="ModifierAlt" xml:space="preserve">
+    <value>Alt</value>
+  </data>
+  <data name="ModifierCtrl" xml:space="preserve">
+    <value>Ctrl</value>
+  </data>
+  <data name="ModifierShift" xml:space="preserve">
+    <value>Shift</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="SetHotkey" xml:space="preserve">
+    <value>Set Hotkey</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
@@ -145,6 +163,6 @@
     <value>Settings</value>
   </data>
   <data name="StartWithWindows" xml:space="preserve">
-    <value>Start with windows</value>
+    <value>Start with Windows</value>
   </data>
 </root>

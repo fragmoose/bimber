@@ -40,7 +40,7 @@
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(180, 22);
+            exitToolStripMenuItem.Size = new Size(116, 22);
             exitToolStripMenuItem.Text = "Exit";
             // 
             // trayIcon
@@ -54,20 +54,20 @@
             // 
             trayMenu.Items.AddRange(new ToolStripItem[] { settingsToolStripMenuItem, exitToolStripMenuItem });
             trayMenu.Name = "trayMenu";
-            trayMenu.Size = new Size(181, 70);
+            trayMenu.Size = new Size(117, 48);
             trayMenu.Opening += trayMenu_Opening;
             // 
             // settingsToolStripMenuItem
             // 
             settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            settingsToolStripMenuItem.Size = new Size(180, 22);
+            settingsToolStripMenuItem.Size = new Size(116, 22);
             settingsToolStripMenuItem.Text = "Settings";
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(273, 187);
             FormBorderStyle = FormBorderStyle.None;
             Name = "MainForm";
             ShowInTaskbar = false;

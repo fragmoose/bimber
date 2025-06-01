@@ -115,11 +115,65 @@ namespace Bimber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Press the keys....
+        /// </summary>
+        internal static string HotkeyPrompt {
+            get {
+                return ResourceManager.GetString("HotkeyPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        internal static string labelLanguage {
+            get {
+                return ResourceManager.GetString("labelLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alt.
+        /// </summary>
+        internal static string ModifierAlt {
+            get {
+                return ResourceManager.GetString("ModifierAlt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ctrl.
+        /// </summary>
+        internal static string ModifierCtrl {
+            get {
+                return ResourceManager.GetString("ModifierCtrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shift.
+        /// </summary>
+        internal static string ModifierShift {
+            get {
+                return ResourceManager.GetString("ModifierShift", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set Hotkey.
+        /// </summary>
+        internal static string SetHotkey {
+            get {
+                return ResourceManager.GetString("SetHotkey", resourceCulture);
             }
         }
         
@@ -142,7 +196,7 @@ namespace Bimber {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start with windows.
+        ///   Looks up a localized string similar to Start with Windows.
         /// </summary>
         internal static string StartWithWindows {
             get {
