@@ -267,6 +267,7 @@ namespace Bimber
                     }
 
                     folderDialog.SelectedPath = defaultFolder;
+                    folderPathTextBox.Text = folderDialog.SelectedPath;
                 }
 
                 if (folderDialog.ShowDialog() == DialogResult.OK)
