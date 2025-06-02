@@ -123,6 +123,9 @@
   <data name="AppTitle" xml:space="preserve">
     <value>Bimber</value>
   </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -132,6 +135,9 @@
   <data name="exitToolStripMenuItem" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="FolderDialogTitle" xml:space="preserve">
+    <value>Select folder for saving images</value>
+  </data>
   <data name="HotkeyLabel" xml:space="preserve">
     <value>Hotkey</value>
   </data>
@@ -140,6 +146,9 @@
   </data>
   <data name="labelLanguage" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="pathTextLabel" xml:space="preserve">
+    <value>Local save path</value>
   </data>
   <data name="ModifierAlt" xml:space="preserve">
     <value>Alt</value>
@@ -153,6 +162,9 @@
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="SaveLocally" xml:space="preserve">
+    <value>Save copy locally</value>
+  </data>
   <data name="SetHotkey" xml:space="preserve">
     <value>Set Hotkey</value>
   </data>
@@ -164,5 +176,38 @@
   </data>
   <data name="StartWithWindows" xml:space="preserve">
     <value>Start with Windows</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Link copied to clipboard</value>
+  </data>
+  <data name="LogLinkLabel" xml:space="preserve">
+    <value>View upload log</value>
+  </data>
+  <data name="UploadLog" xml:space="preserve">
+    <value>Upload log</value>
+  </data>
+  <data name="Nolog" xml:space="preserve">
+    <value>No log file exists yet</value>
+  </data>
+  <data name="emptyapi" xml:space="preserve">
+    <value>API key cannot be empty!</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="updateCheck" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="noUpdate" xml:space="preserve">
+    <value>You have the latest version</value>
+  </data>
+  <data name="noUpdatetitle" xml:space="preserve">
+    <value>No update</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>A Bimber update is available. Would you like to download and install it now?</value>
+  </data>
+  <data name="updating" xml:space="preserve">
+    <value>Downloading update....</value>
   </data>
 </root>

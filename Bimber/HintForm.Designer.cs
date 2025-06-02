@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HintForm));
             SuspendLayout();
             // 
             // HintForm
@@ -35,6 +36,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(120, 0);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "HintForm";
             Text = "Form1";
             Load += HintForm_Load;

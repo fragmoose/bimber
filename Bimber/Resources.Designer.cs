@@ -79,11 +79,38 @@ namespace Bimber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Browse....
+        /// </summary>
+        internal static string Browse {
+            get {
+                return ResourceManager.GetString("Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to API key cannot be empty!.
+        /// </summary>
+        internal static string emptyapi {
+            get {
+                return ResourceManager.GetString("emptyapi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string error {
+            get {
+                return ResourceManager.GetString("error", resourceCulture);
             }
         }
         
@@ -102,6 +129,15 @@ namespace Bimber {
         internal static string exitToolStripMenuItem {
             get {
                 return ResourceManager.GetString("exitToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select folder for saving images.
+        /// </summary>
+        internal static string FolderDialogTitle {
+            get {
+                return ResourceManager.GetString("FolderDialogTitle", resourceCulture);
             }
         }
         
@@ -133,6 +169,24 @@ namespace Bimber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View upload log.
+        /// </summary>
+        internal static string LogLinkLabel {
+            get {
+                return ResourceManager.GetString("LogLinkLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Link copied to clipboard.
+        /// </summary>
+        internal static string Message {
+            get {
+                return ResourceManager.GetString("Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Alt.
         /// </summary>
         internal static string ModifierAlt {
@@ -160,11 +214,56 @@ namespace Bimber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No log file exists yet.
+        /// </summary>
+        internal static string Nolog {
+            get {
+                return ResourceManager.GetString("Nolog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have the latest version.
+        /// </summary>
+        internal static string noUpdate {
+            get {
+                return ResourceManager.GetString("noUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No update.
+        /// </summary>
+        internal static string noUpdatetitle {
+            get {
+                return ResourceManager.GetString("noUpdatetitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local save path.
+        /// </summary>
+        internal static string pathTextLabel {
+            get {
+                return ResourceManager.GetString("pathTextLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save copy locally.
+        /// </summary>
+        internal static string SaveLocally {
+            get {
+                return ResourceManager.GetString("SaveLocally", resourceCulture);
             }
         }
         
@@ -201,6 +300,42 @@ namespace Bimber {
         internal static string StartWithWindows {
             get {
                 return ResourceManager.GetString("StartWithWindows", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A Bimber update is available. Would you like to download and install it now?.
+        /// </summary>
+        internal static string UpdateAvailable {
+            get {
+                return ResourceManager.GetString("UpdateAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check for updates.
+        /// </summary>
+        internal static string updateCheck {
+            get {
+                return ResourceManager.GetString("updateCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading update.....
+        /// </summary>
+        internal static string updating {
+            get {
+                return ResourceManager.GetString("updating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload log.
+        /// </summary>
+        internal static string UploadLog {
+            get {
+                return ResourceManager.GetString("UploadLog", resourceCulture);
             }
         }
     }

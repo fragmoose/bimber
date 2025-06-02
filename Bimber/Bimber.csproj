@@ -2,11 +2,19 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+	  <Version>1.0.0.$([System.DateTime]::Now.ToString("yyMMdd"))</Version>
+	  <FileVersion>1.0.0.$([System.DateTime]::Now.ToString("yyMMdd"))</FileVersion>
+	  <AssemblyVersion>1.0.0.0</AssemblyVersion>
+	  <ApplicationIcon>vodka.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="vodka.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

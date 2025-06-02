@@ -7,11 +7,20 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
+using Microsoft.Win32;
+using System.IO;
 
 namespace Bimber
 {
+    public interface IImageUploader
+    {
+        Task<string> UploadImageAsync(Stream imageStream, string fileName);
+    }
     public partial class MainForm : Form
     {
+        private readonly UpdateChecker _updateChecker;
+        private readonly UpdateInstaller _updateInstaller;
+        private const string GitHubRepoUrl = "https://https://github.com/fragmoose/bimber";
         private readonly global::AppSettings settings;
 
         // Low-level keyboard hook for global hotkeys
@@ -43,11 +52,14 @@ namespace Bimber
 
         public MainForm()
         {
+            _updateChecker = new UpdateChecker(GitHubRepoUrl);
+            _updateInstaller = new UpdateInstaller(GitHubRepoUrl);
             InitializeComponent();
             settings = global::AppSettings.Load();
             InitializeLanguage();
             InitializeTrayMenu();
             RegisterHotkey();
+            CheckForUpdatesSilently();
         }
 
         private void InitializeLanguage()
@@ -59,6 +71,7 @@ namespace Bimber
         private void UpdateTexts()
         {
             trayIcon.Text = Resources.AppTitle;
+            updateStripMenuItem1.Text = Resources.updateCheck;
             settingsToolStripMenuItem.Text = Resources.Settings;
             exitToolStripMenuItem.Text = Resources.Exit;
         }
@@ -66,6 +79,7 @@ namespace Bimber
         private void InitializeTrayMenu()
         {
             trayIcon.ContextMenuStrip = trayMenu;
+            updateStripMenuItem1.Click += (s, e) => checkUpdate();
             settingsToolStripMenuItem.Click += (s, e) => ShowSettings();
             exitToolStripMenuItem.Click += (s, e) => ExitApplication();
         }
@@ -241,32 +255,35 @@ namespace Bimber
                             var snipper = new ScreenSnipTool();
                             // Start the snipping process
                             snipper.StartSelection();
-                            // Create ImageUploader instance with your settings
-                            var uploader = new ImageUploader(settings);
+                            // Create appropriate ImageUploader instance based on settings
+                            IImageUploader uploader = settings.ImageUploaderType == "ImageUploader2"
+                                ? new ImageUploader2(settings)
+                                : new ImageUploader(settings);
                             string message = "default text";
+
                             // Subscribe to the completion event
                             snipper.SnipCompleted += async (snippedImage) =>
                             {
+                                string localPath = string.Empty;
+                                string imageUrl = string.Empty;
+
                                 try
                                 {
                                     using (var memoryStream = new MemoryStream())
                                     {
-                                        // Save image to memory stream
                                         snippedImage.Save(memoryStream, ImageFormat.Png);
-                                        memoryStream.Position = 0; // Reset stream position
+                                        memoryStream.Position = 0;
 
                                         // Upload the image
-                                        string imageUrl = await uploader.UploadImageAsync(memoryStream, $"screenshot_{DateTime.Now:yyyyMMddHHmmss}.png");
+                                        imageUrl = await uploader.UploadImageAsync(memoryStream, $"bimber_{DateTime.Now:yyyyMMddHHmmss}.png");
 
-                                        // Do something with the URL (copy to clipboard, show in UI, etc.)
+                                        // Clipboard and hint operations
                                         Clipboard.SetText(imageUrl);
-                                        // Show hint (optional)
-                                        message = "Zrzut ekranu przesłany pomyślnie!\nURL:" + imageUrl;
-                                        Clipboard.SetText(imageUrl);
+                                        message = Resources.Message;
                                         HintForm hint = new HintForm(message);
                                         hint.Show();
 
-                                        // Auto-close hint after 3 seconds
+                                        // Auto-close timer
                                         System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
                                         timer.Interval = 3000;
                                         timer.Tick += (s, e) => {
@@ -275,16 +292,35 @@ namespace Bimber
                                             timer.Dispose();
                                         };
                                         timer.Start();
-                                        
+
+                                        // Save locally if enabled
+                                        if (settings.SaveLocally && !string.IsNullOrEmpty(settings.LocalSavePath))
+                                        {
+                                            try
+                                            {
+                                                string fileName = $"bimber_{DateTime.Now:yyyyMMddHHmmss}.png";
+                                                localPath = Path.Combine(settings.LocalSavePath, fileName);
+                                                snippedImage.Save(localPath, ImageFormat.Png);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Console.WriteLine($"Error saving locally: {ex.Message}");
+                                            }
+                                        }
+
+                                        // Log the URL regardless of local saving
+                                        if (!string.IsNullOrEmpty(imageUrl))
+                                        {
+                                            LogToFile(localPath, imageUrl);
+                                        }
                                     }
                                 }
                                 catch (Exception ex)
                                 {
-                                    message = "Błąd podczas przesyłania zrzutu:" + ex.Message;
+                                    message = "Error saving snip:" + ex.Message;
                                     HintForm hint = new HintForm(message);
                                     hint.Show();
 
-                                    // Auto-close hint after 3 seconds
                                     System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
                                     timer.Interval = 3000;
                                     timer.Tick += (s, e) => {
@@ -296,14 +332,9 @@ namespace Bimber
                                 }
                                 finally
                                 {
-                                    // Always dispose the image
                                     snippedImage.Dispose();
                                 }
                             };
-
-                            
-
-                            
                         });
 
                         return (IntPtr)1;
@@ -332,5 +363,97 @@ namespace Bimber
         {
             base.WndProc(ref m);
         }
+        private void LogToFile(string localPath, string imageUrl)
+        {
+            try
+            {
+                string logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log.txt");
+                string logEntry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {(string.IsNullOrEmpty(localPath) ? "N/A" : localPath)};{imageUrl}{Environment.NewLine}";
+
+                File.AppendAllText(logFilePath, logEntry);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error writing to log file: {ex.Message}");
+            }
+        }
+        private async void CheckForUpdatesSilently()
+        {
+            try
+            {
+                var updateAvailable = await _updateChecker.CheckForUpdatesAsync();
+                if (updateAvailable)
+                {
+                    if (MessageBox.Show(Resources.UpdateAvailable,
+                        "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    {
+                        await InstallUpdateAsync();
+                    }
+                }
+            }
+            catch
+            {
+                // Silent fail - don't bother user if update check fails
+            } }
+        private async void checkUpdate()
+        {
+            try
+            {
+                var updateAvailable = await _updateChecker.CheckForUpdatesAsync();
+                if (updateAvailable)
+                {
+                    if (MessageBox.Show(Resources.UpdateAvailable,
+                        "Update", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    {
+                        await InstallUpdateAsync();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(Resources.noUpdate, Resources.noUpdatetitle,
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Failed to check for updates: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+            private async Task InstallUpdateAsync() { 
+        
+            try
+            {
+                // Show a progress dialog
+                var progressForm = new Form
+                {
+                    Text = Resources.updating,
+                    Width = 300,
+                    Height = 100,
+                    FormBorderStyle = FormBorderStyle.FixedDialog,
+                    StartPosition = FormStartPosition.CenterParent
+                };
+
+                var progressBar = new ProgressBar { Dock = DockStyle.Fill };
+                var statusLabel = new Label { Text = Resources.updating, Dock = DockStyle.Bottom };
+
+                progressForm.Controls.Add(progressBar);
+                progressForm.Controls.Add(statusLabel);
+
+                progressForm.Show(this);
+
+                await _updateInstaller.DownloadAndInstallUpdateAsync();
+
+                progressForm.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Update failed: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
+
+
+

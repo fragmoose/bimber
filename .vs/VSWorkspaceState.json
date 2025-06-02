@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Bimber",
+    "\\bin"
   ],
-  "SelectedNode": "\\Bimber.sln",
+  "SelectedNode": "\\Bimber\\MainForm.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -70,5 +70,41 @@ namespace Bimber.Properties {
                 this["Language"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ImageUploader")]
+        public string ImageUploaderType {
+            get {
+                return ((string)(this["ImageUploaderType"]));
+            }
+            set {
+                this["ImageUploaderType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SaveLocally {
+            get {
+                return ((bool)(this["SaveLocally"]));
+            }
+            set {
+                this["SaveLocally"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LocalSavePath {
+            get {
+                return ((string)(this["LocalSavePath"]));
+            }
+            set {
+                this["LocalSavePath"] = value;
+            }
+        }
     }
 }

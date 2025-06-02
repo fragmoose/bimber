@@ -33,6 +33,7 @@
             exitToolStripMenuItem = new ToolStripMenuItem();
             trayIcon = new NotifyIcon(components);
             trayMenu = new ContextMenuStrip(components);
+            updateStripMenuItem1 = new ToolStripMenuItem();
             settingsToolStripMenuItem = new ToolStripMenuItem();
             trayMenu.SuspendLayout();
             SuspendLayout();
@@ -40,7 +41,7 @@
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(116, 22);
+            exitToolStripMenuItem.Size = new Size(180, 22);
             exitToolStripMenuItem.Text = "Exit";
             // 
             // trayIcon
@@ -52,15 +53,21 @@
             // 
             // trayMenu
             // 
-            trayMenu.Items.AddRange(new ToolStripItem[] { settingsToolStripMenuItem, exitToolStripMenuItem });
+            trayMenu.Items.AddRange(new ToolStripItem[] { updateStripMenuItem1, settingsToolStripMenuItem, exitToolStripMenuItem });
             trayMenu.Name = "trayMenu";
-            trayMenu.Size = new Size(117, 48);
+            trayMenu.Size = new Size(181, 70);
             trayMenu.Opening += trayMenu_Opening;
+            // 
+            // updateStripMenuItem1
+            // 
+            updateStripMenuItem1.Name = "updateStripMenuItem1";
+            updateStripMenuItem1.Size = new Size(180, 22);
+            updateStripMenuItem1.Text = "toolStripMenuItem1";
             // 
             // settingsToolStripMenuItem
             // 
             settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            settingsToolStripMenuItem.Size = new Size(116, 22);
+            settingsToolStripMenuItem.Size = new Size(180, 22);
             settingsToolStripMenuItem.Text = "Settings";
             // 
             // MainForm
@@ -69,6 +76,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(273, 187);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
             ShowInTaskbar = false;
             Text = "Form1";
@@ -92,4 +100,5 @@
             trayIcon.Visible = true;
         }
         private ToolStripMenuItem exitToolStripMenuItem;
+        private ToolStripMenuItem updateStripMenuItem1;
     } }

@@ -21,19 +21,24 @@ public class AppSettings
     public bool StartWithWindows { get; set; }
     public string Hotkey { get; set; } = "";
     public string Language { get; set; } = "en";
-
+    public string ImageUploaderType { get; set; } = "ImageUploader";
+    public bool SaveLocally { get; set; } = false;
+    public string LocalSavePath { get; set; } = string.Empty;
     public void Save()
     {
         Bimber.Properties.Settings.Default.ApiKey = ApiKey;
         Bimber.Properties.Settings.Default.StartWithWindows = StartWithWindows;
         Bimber.Properties.Settings.Default.Hotkey = Hotkey;
         Bimber.Properties.Settings.Default.Language = Language;
+        Bimber.Properties.Settings.Default.ImageUploaderType = ImageUploaderType;
+        Bimber.Properties.Settings.Default.SaveLocally = SaveLocally;
+        Bimber.Properties.Settings.Default.LocalSavePath = LocalSavePath;
         Bimber.Properties.Settings.Default.Save();
     }
     public void SetStartup(bool enable)
     {
         RegistryKey rk = Registry.CurrentUser.OpenSubKey(
-            "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
 
         if (enable)
         {
@@ -52,7 +57,8 @@ public class AppSettings
             ApiKey = Bimber.Properties.Settings.Default.ApiKey,
             StartWithWindows = Bimber.Properties.Settings.Default.StartWithWindows,
             Hotkey = Bimber.Properties.Settings.Default.Hotkey,
-            Language = Bimber.Properties.Settings.Default.Language
+            Language = Bimber.Properties.Settings.Default.Language,
+            ImageUploaderType = Bimber.Properties.Settings.Default.ImageUploaderType 
         };
     }
 }

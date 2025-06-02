@@ -14,5 +14,14 @@
     <Setting Name="Language" Type="System.String" Scope="User">
       <Value Profile="(Default)">en</Value>
     </Setting>
+    <Setting Name="ImageUploaderType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ImageUploader</Value>
+    </Setting>
+    <Setting Name="SaveLocally" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LocalSavePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
