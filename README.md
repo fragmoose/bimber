@@ -12,15 +12,15 @@ Bimber is a lightweight background application that enhances your screenshot exp
 ## Installation
 
 1. Download the latest release from the [Releases](https://github.com/fragmoose/bimber/releases) page.
-2. Extract the files and run the installer.
+2. Extract the files or run the installer.
 3. Follow the on-screen instructions to complete the installation.
 
 ## Usage
 
-1. Launch Bimber from your applications or the tray icon.
-2. Set your desired hotkey in the settings menu.
+1. Launch Bimber and right click the tray icon.
+2. Set your desired hotkey, favourite hosting and API key in the settings menu.
 3. Use the hotkey to snip a portion of your screen.
-4. The image will be uploaded to PixVid, and the link will be copied to your clipboard.
+4. The image will be uploaded to hosting, and the link will be copied to your clipboard.
 
 ## Contributing
 
