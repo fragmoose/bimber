@@ -7,7 +7,7 @@ Bimber is a lightweight background application that enhances your screenshot exp
 - **Background Operation**: Runs silently in the background with only a tray icon visible.
 - **Custom Hotkeys**: Set your preferred hotkey or hotkey combination for quick access.
 - **Automatic Snipping**: Snip a selected area of the screen automatically.
-- **Instant Upload**: Automatically uploads the captured image to [PixVid](https://pixvid.org/) and copies the link to your clipboard for easy sharing.
+- **Instant Upload**: Automatically uploads the captured image to set hosting and copies the link to your clipboard for easy sharing.
 
 ## Installation
 
