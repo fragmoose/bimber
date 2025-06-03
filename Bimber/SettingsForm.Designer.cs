@@ -59,6 +59,7 @@
             apiKeyTextBox = new TextBox();
             apiKeyLabel = new Label();
             errorProvider1 = new ErrorProvider(components);
+            linkLabel1 = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
@@ -215,11 +216,24 @@
             // 
             errorProvider1.ContainerControl = this;
             // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.Location = new Point(229, 5);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(40, 15);
+            linkLabel1.TabIndex = 11;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "About";
+            linkLabel1.TextAlign = ContentAlignment.BottomRight;
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked_1;
+            // 
             // SettingsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(277, 396);
+            Controls.Add(linkLabel1);
             Controls.Add(apiKeyLabel);
             Controls.Add(apiKeyTextBox);
             Controls.Add(logLinkLabel);
@@ -266,5 +280,6 @@
         private TextBox apiKeyTextBox;
         private Label apiKeyLabel;
         private ErrorProvider errorProvider1;
+        private LinkLabel linkLabel1;
     }
 }

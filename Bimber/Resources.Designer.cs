@@ -61,6 +61,15 @@ namespace Bimber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to API Key.
         /// </summary>
         internal static string ApiKeyLabel {
@@ -75,6 +84,15 @@ namespace Bimber {
         internal static string AppTitle {
             get {
                 return ResourceManager.GetString("AppTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Author.
+        /// </summary>
+        internal static string author {
+            get {
+                return ResourceManager.GetString("author", resourceCulture);
             }
         }
         
@@ -160,11 +178,38 @@ namespace Bimber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hotkey registration failed.
+        /// </summary>
+        internal static string HotkeyRegistrationFailed {
+            get {
+                return ResourceManager.GetString("HotkeyRegistrationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image URL.
+        /// </summary>
+        internal static string ImageURL {
+            get {
+                return ResourceManager.GetString("ImageURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         internal static string labelLanguage {
             get {
                 return ResourceManager.GetString("labelLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local path.
+        /// </summary>
+        internal static string LocalPath {
+            get {
+                return ResourceManager.GetString("LocalPath", resourceCulture);
             }
         }
         
@@ -304,6 +349,15 @@ namespace Bimber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Timestamp.
+        /// </summary>
+        internal static string Timestamp {
+            get {
+                return ResourceManager.GetString("Timestamp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A Bimber update is available. Would you like to download and install it now?.
         /// </summary>
         internal static string UpdateAvailable {
@@ -336,6 +390,24 @@ namespace Bimber {
         internal static string UploadLog {
             get {
                 return ResourceManager.GetString("UploadLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        internal static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log browser.
+        /// </summary>
+        internal static string Viewlog {
+            get {
+                return ResourceManager.GetString("Viewlog", resourceCulture);
             }
         }
     }

@@ -26,41 +26,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SettingsForm.cs",
-              "DocumentMoniker": "C:\\Users\\pdgro\\source\\repos\\fragmoose\\bimber\\Bimber\\SettingsForm.cs",
-              "RelativeDocumentMoniker": "Bimber\\SettingsForm.cs",
-              "ToolTip": "C:\\Users\\pdgro\\source\\repos\\fragmoose\\bimber\\Bimber\\SettingsForm.cs",
-              "RelativeToolTip": "Bimber\\SettingsForm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "C:\\Users\\pdgro\\source\\repos\\fragmoose\\bimber\\Bimber\\MainForm.cs",
+              "RelativeDocumentMoniker": "Bimber\\MainForm.cs",
+              "ToolTip": "C:\\Users\\pdgro\\source\\repos\\fragmoose\\bimber\\Bimber\\MainForm.cs",
+              "RelativeToolTip": "Bimber\\MainForm.cs",
+              "ViewState": "AgIAAD4BAAAAAAAAAAAAABYAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T16:27:24.313Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ImageUploader2.cs",
-              "DocumentMoniker": "C:\\Users\\pdgro\\source\\repos\\fragmoose\\bimber\\Bimber\\ImageUploader2.cs",
-              "RelativeDocumentMoniker": "Bimber\\ImageUploader2.cs",
-              "ToolTip": "C:\\Users\\pdgro\\source\\repos\\fragmoose\\bimber\\Bimber\\ImageUploader2.cs",
-              "RelativeToolTip": "Bimber\\ImageUploader2.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAAADoAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T16:25:07.009Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-01T13:40:01.557Z",
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -73,20 +52,42 @@
               "ViewState": "AgIAAAoAAAAAAAAAAAAgwBoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-02T16:22:44.408Z",
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainForm.cs",
-              "DocumentMoniker": "C:\\Users\\pdgro\\source\\repos\\fragmoose\\bimber\\Bimber\\MainForm.cs",
-              "RelativeDocumentMoniker": "Bimber\\MainForm.cs",
-              "ToolTip": "C:\\Users\\pdgro\\source\\repos\\fragmoose\\bimber\\Bimber\\MainForm.cs",
-              "RelativeToolTip": "Bimber\\MainForm.cs",
-              "ViewState": "AgIAAD4BAAAAAAAAAAAAABYAAAAnAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ImageUploader2.cs",
+              "DocumentMoniker": "C:\\Users\\pdgro\\source\\repos\\fragmoose\\bimber\\Bimber\\ImageUploader2.cs",
+              "RelativeDocumentMoniker": "Bimber\\ImageUploader2.cs",
+              "ToolTip": "C:\\Users\\pdgro\\source\\repos\\fragmoose\\bimber\\Bimber\\ImageUploader2.cs",
+              "RelativeToolTip": "Bimber\\ImageUploader2.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAAADoAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-01T13:40:01.557Z",
+              "WhenOpened": "2025-06-02T16:25:07.009Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SettingsForm.cs",
+              "DocumentMoniker": "C:\\Users\\pdgro\\source\\repos\\fragmoose\\bimber\\Bimber\\SettingsForm.cs",
+              "RelativeDocumentMoniker": "Bimber\\SettingsForm.cs",
+              "ToolTip": "C:\\Users\\pdgro\\source\\repos\\fragmoose\\bimber\\Bimber\\SettingsForm.cs",
+              "RelativeToolTip": "Bimber\\SettingsForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-02T16:27:24.313Z",
+              "IsPinned": true,
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             }
           ]
         }

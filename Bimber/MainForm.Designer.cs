@@ -55,7 +55,7 @@
             // 
             trayMenu.Items.AddRange(new ToolStripItem[] { updateStripMenuItem1, settingsToolStripMenuItem, exitToolStripMenuItem });
             trayMenu.Name = "trayMenu";
-            trayMenu.Size = new Size(181, 70);
+            trayMenu.Size = new Size(181, 92);
             trayMenu.Opening += trayMenu_Opening;
             // 
             // updateStripMenuItem1

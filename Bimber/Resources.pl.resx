@@ -210,4 +210,28 @@
   <data name="updating" xml:space="preserve">
     <value>Pobieram aktualizację...</value>
   </data>
+  <data name="HotkeyRegistrationFailed" xml:space="preserve">
+    <value>Nie udało się zarejestrować skrótu</value>
+  </data>
+  <data name="Timestamp" xml:space="preserve">
+    <value>Data i godzina</value>
+  </data>
+  <data name="LocalPath" xml:space="preserve">
+    <value>Ścieżka lokalna</value>
+  </data>
+  <data name="ImageURL" xml:space="preserve">
+    <value>Link do obrazka</value>
+  </data>
+  <data name="Viewlog" xml:space="preserve">
+    <value>Przeglądaj logi</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>O mnie</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Wersja</value>
+  </data>
+  <data name="author" xml:space="preserve">
+    <value>Autor</value>
+  </data>
 </root>
