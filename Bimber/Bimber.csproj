@@ -6,9 +6,9 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-	  <Version>1.0.0.$([System.DateTime]::Now.ToString("yyMMdd"))</Version>
-	  <FileVersion>1.0.0.$([System.DateTime]::Now.ToString("yyMMdd"))</FileVersion>
-	  <AssemblyVersion>1.0.0.2</AssemblyVersion>
+	  <Version>1.0.0.3</Version>
+	  <FileVersion>1.0.0.3</FileVersion>
+	  <AssemblyVersion>1.0.0.3</AssemblyVersion>
 	  <ApplicationIcon>vodka.ico</ApplicationIcon>
   </PropertyGroup>
 

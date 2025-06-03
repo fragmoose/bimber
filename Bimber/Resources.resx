@@ -234,4 +234,7 @@
   <data name="author" xml:space="preserve">
     <value>Author</value>
   </data>
+  <data name="Logs" xml:space="preserve">
+    <value>Logs</value>
+  </data>
 </root>

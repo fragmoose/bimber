@@ -73,14 +73,17 @@ namespace Bimber
         {
             trayIcon.Text = Resources.AppTitle;
             updateStripMenuItem1.Text = Resources.updateCheck;
+            logsStripMenuItem1.Text = Resources.Logs;
             settingsToolStripMenuItem.Text = Resources.Settings;
             exitToolStripMenuItem.Text = Resources.Exit;
         }
-
+        
         private void InitializeTrayMenu()
         {
+            var logViewer = new LogViewerManager();
             trayIcon.ContextMenuStrip = trayMenu;
             updateStripMenuItem1.Click += (s, e) => checkUpdate();
+            logsStripMenuItem1.Click += (s, e) => logViewer.ShowLogs(); 
             settingsToolStripMenuItem.Click += (s, e) => ShowSettings();
             exitToolStripMenuItem.Click += (s, e) => ExitApplication();
         }
@@ -92,7 +95,7 @@ namespace Bimber
             {
                 settings.Save();
                 InitializeLanguage();
-                RegisterHotkey(); // Re-register hotkey if changed
+                RegisterHotkey();
             }
         }
 

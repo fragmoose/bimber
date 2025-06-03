@@ -183,7 +183,7 @@
             logLinkLabel.Text = "Log";
             logLinkLabel.TextAlign = ContentAlignment.MiddleRight;
             logLinkLabel.VisitedLinkColor = Color.Blue;
-            logLinkLabel.LinkClicked += linkLabel1_LinkClicked;
+
             // 
             // comboBox1
             // 

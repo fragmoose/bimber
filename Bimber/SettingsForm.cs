@@ -16,7 +16,7 @@ namespace Bimber
             settings = currentSettings;
             InitializeForm();
         }
-
+        
         private void InitializeForm()
         {
             apiKeyTextBox.Text = settings.ApiKey;
@@ -37,6 +37,7 @@ namespace Bimber
             var fileVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
 
             // Localize form
+            var logViewer = new LogViewerManager();
             Text = Resources.Settings + " Bimber v" + fileVersion;
             apiKeyLabel.Text = Resources.ApiKeyLabel;
             startWithWindowsCheckBox.Text = Resources.StartWithWindows;
@@ -49,9 +50,9 @@ namespace Bimber
             browseFolderButton.Text = Resources.Browse;
             logLinkLabel.Text = Resources.LogLinkLabel;
             linkLabel1.Text = Resources.About;
-            logLinkLabel.Click += (s, e) => linkLabel1_LinkClicked(s, new LinkLabelLinkClickedEventArgs(null));
-        }
-
+            logLinkLabel.Click += (s, e) => logViewer.ShowLogs();
+        }        
+        
         private void SaveBtn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(apiKeyTextBox.Text))
@@ -320,285 +321,6 @@ namespace Bimber
             }
         }
 
-        private async void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            string logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log.txt");
-            var previewUrlHolder = new PreviewUrlHolder();
-
-            try
-            {
-                if (File.Exists(logFilePath))
-                {
-                    string[] logLines = File.ReadAllLines(logFilePath);
-                    Array.Reverse(logLines);
-
-                    ViewLog logViewer = Application.OpenForms.OfType<ViewLog>().FirstOrDefault() ?? new ViewLog();
-
-                    logViewer.Text = Resources.UploadLog;
-                    logViewer.StartPosition = FormStartPosition.CenterParent;
-
-                    // Configure DataGridView
-                    ConfigureDataGridView(logViewer);
-
-                    // Parse and add log entries
-                    foreach (var line in logLines)
-                    {
-                        var parts = line.Split(';');
-                        if (parts.Length >= 2)
-                        {
-                            logViewer.dataGridView1.Rows.Add(
-                                parts[0].Trim(),
-                                parts.Length > 1 ? parts[1].Trim() : "N/A",
-                                parts[parts.Length - 1].Trim()
-                            );
-                        }
-                    }
-
-                    // Configure URL column
-                    logViewer.dataGridView1.Columns["ImageURL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    logViewer.dataGridView1.Columns["ImageURL"].DefaultCellStyle.ForeColor = Color.Blue;
-                    logViewer.dataGridView1.Columns["ImageURL"].DefaultCellStyle.Font =
-                        new Font(logViewer.dataGridView1.Font, FontStyle.Underline);
-
-                    // Initialize preview PictureBox if not exists
-                    if (logViewer.pictureBox1 == null)
-                    {
-                        logViewer.pictureBox1 = new PictureBox
-                        {
-                            SizeMode = PictureBoxSizeMode.Zoom,
-                            BackColor = Color.White,
-                            Visible = false,
-                        };
-                        logViewer.Controls.Add(logViewer.pictureBox1);
-                        //logViewer.pictureBox1.BringToFront();
-
-                        // Position it (if needed)
-                        logViewer.pictureBox1.Location = new Point(
-                            logViewer.Width - logViewer.pictureBox1.Width - 20,
-                            20
-                        );
-                    }
-
-
-
-                    ToolTip copyToolTip = new ToolTip
-                    {
-                        IsBalloon = true,
-                        ToolTipIcon = ToolTipIcon.Info,
-                        ToolTipTitle = "Success",
-                        AutoPopDelay = 2000,
-                        InitialDelay = 0,
-                        ReshowDelay = 0
-                    };
-
-                    // Setup event handlers
-                    SetupGridViewEventHandlers(logViewer, copyToolTip, previewUrlHolder);
-
-                    logViewer.Show();
-                }
-                else
-                {
-                    MessageBox.Show(Resources.Nolog, Resources.UploadLog,
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Log Reading error: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void ConfigureDataGridView(ViewLog logViewer)
-        {
-            logViewer.dataGridView1.Rows.Clear();
-            logViewer.dataGridView1.Columns.Clear();
-
-            logViewer.dataGridView1.AllowUserToAddRows = false;
-            logViewer.dataGridView1.AllowUserToDeleteRows = false;
-            logViewer.dataGridView1.ReadOnly = true;
-            logViewer.dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            logViewer.dataGridView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            logViewer.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            logViewer.dataGridView1.RowHeadersVisible = false;
-            logViewer.dataGridView1.DefaultCellStyle = new DataGridViewCellStyle
-            {
-                Font = new Font("Consolas", 10),
-                SelectionBackColor = Color.LightGray,
-                SelectionForeColor = Color.Black
-            };
-
-            logViewer.dataGridView1.Columns.Add("Timestamp", Resources.Timestamp);
-            logViewer.dataGridView1.Columns.Add("LocalPath", Resources.LocalPath);
-            logViewer.dataGridView1.Columns.Add("ImageURL", Resources.ImageURL);
-        }
-        private class PreviewUrlHolder
-        {
-            public string CurrentPreviewUrl { get; set; }
-        }
-        private void SetupGridViewEventHandlers(ViewLog logViewer, ToolTip copyToolTip, PreviewUrlHolder urlHolder)
-        {
-            bool suppressContextMenu = false;
-
-            // Mouse down event for context menu suppression
-            logViewer.dataGridView1.MouseDown += (s, ev) =>
-            {
-                if (ev.Button == MouseButtons.Right)
-                {
-                    var hitTest = logViewer.dataGridView1.HitTest(ev.X, ev.Y);
-                    if (hitTest.Type == DataGridViewHitTestType.Cell &&
-                        hitTest.ColumnIndex == logViewer.dataGridView1.Columns["ImageURL"].Index)
-                    {
-                        suppressContextMenu = true;
-                    }
-                }
-            };
-
-            // Context menu handling
-            logViewer.dataGridView1.ContextMenuStripChanged += (s, ev) =>
-            {
-                if (suppressContextMenu)
-                {
-                    logViewer.dataGridView1.ContextMenuStrip = null;
-                    suppressContextMenu = false;
-                }
-            };
-
-            // Image preview on mouse enter
-            logViewer.dataGridView1.CellMouseEnter += (s, ev) =>
-            {
-                if (ev.ColumnIndex == logViewer.dataGridView1.Columns["ImageURL"].Index && ev.RowIndex >= 0)
-                {
-                    string url = logViewer.dataGridView1.Rows[ev.RowIndex].Cells[ev.ColumnIndex].Value?.ToString();
-
-                    if (!string.IsNullOrEmpty(url) && Uri.IsWellFormedUriString(url, UriKind.Absolute) &&
-                        url != urlHolder.CurrentPreviewUrl)
-                    {
-                        urlHolder.CurrentPreviewUrl = url;
-                        logViewer.pictureBox1.Visible = true;
-                        _ = LoadImagePreviewAsync(url, logViewer);
-                    }
-                }
-            };
-
-            // Hide preview on mouse leave
-            logViewer.dataGridView1.CellMouseLeave += (s, ev) =>
-            {
-                if (ev.ColumnIndex == logViewer.dataGridView1.Columns["ImageURL"].Index)
-                {
-                    urlHolder.CurrentPreviewUrl = null;
-                    logViewer.pictureBox1.Visible = false;
-                }
-            };
-
-            // Cell mouse click handlers
-            logViewer.dataGridView1.CellMouseDown += (s, ev) =>
-            {
-                if (ev.RowIndex >= 0 && ev.ColumnIndex == logViewer.dataGridView1.Columns["ImageURL"].Index)
-                {
-                    var cell = logViewer.dataGridView1.Rows[ev.RowIndex].Cells[ev.ColumnIndex];
-                    string url = cell.Value?.ToString();
-
-                    if (!string.IsNullOrEmpty(url))
-                    {
-                        try
-                        {
-                            Clipboard.SetText(url);
-
-                            if (ev.Button == MouseButtons.Left && logViewer.pictureBox1.Visible)
-                            {
-                                ShowCopyConfirmation(logViewer);
-                            }
-
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Failed to copy URL: {ex.Message}", "Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-            };
-
-            // Double click to open URL
-            logViewer.dataGridView1.CellDoubleClick += (s, ev) =>
-            {
-                if (ev.RowIndex >= 0 && ev.ColumnIndex == logViewer.dataGridView1.Columns["ImageURL"].Index)
-                {
-                    string url = logViewer.dataGridView1.Rows[ev.RowIndex].Cells[ev.ColumnIndex].Value?.ToString();
-                    if (!string.IsNullOrEmpty(url))
-                    {
-                        try
-                        {
-                            Process.Start(new ProcessStartInfo
-                            {
-                                FileName = url,
-                                UseShellExecute = true
-                            });
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Cannot open url: {ex.Message}", "Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-            };
-
-            // Cleanup when form is closed
-            logViewer.FormClosed += (s, ev) =>
-            {
-                logViewer.pictureBox1?.Image?.Dispose();
-                copyToolTip.Dispose();
-            };
-        }
-
-
-
-        private async Task LoadImagePreviewAsync(string imageUrl, ViewLog logViewer)
-        {
-            try
-            {
-                // Make sure PictureBox is visible and ready
-                logViewer.pictureBox1.Visible = true;
-                logViewer.pictureBox1.BringToFront();
-
-                using (HttpClient client = new HttpClient())
-                {
-                    byte[] imageBytes = await client.GetByteArrayAsync(imageUrl);
-                    using (MemoryStream ms = new MemoryStream(imageBytes))
-                    {
-                        // Clear any existing image first
-                        if (logViewer.pictureBox1.Image != null)
-                        {
-                            logViewer.pictureBox1.Image.Dispose();
-                            logViewer.pictureBox1.Image = null;
-                        }
-
-                        Image image = Image.FromStream(ms);
-                        logViewer.pictureBox1.Image = image;
-                        logViewer.pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                        logViewer.pictureBox1.Refresh(); // Force immediate redraw
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                logViewer.pictureBox1.Image = null;
-                logViewer.pictureBox1.Visible = false;
-                Console.WriteLine($"Error loading image: {ex.Message}");
-            }
-        }
-
-        private void ShowCopyConfirmation(ViewLog logViewer)
-        {
-            logViewer.Invoke(new Action(() =>
-            {
-                var hintDisplayer = new HintDisplayer();
-                hintDisplayer.ShowHint(Resources.Message);
-            }));
-        }
-
         private void apiKeyTextBox_TextChanged(object sender, EventArgs e)
         {
             bool isValid = !string.IsNullOrWhiteSpace(apiKeyTextBox.Text);
@@ -611,5 +333,8 @@ namespace Bimber
             var aboutForm = new AboutBox1();
             aboutForm.ShowDialog();
         }
+     
+
+        
     }
 }

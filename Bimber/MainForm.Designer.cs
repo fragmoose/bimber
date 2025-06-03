@@ -35,11 +35,13 @@
             trayMenu = new ContextMenuStrip(components);
             updateStripMenuItem1 = new ToolStripMenuItem();
             settingsToolStripMenuItem = new ToolStripMenuItem();
+            logsStripMenuItem1 = new ToolStripMenuItem();
             trayMenu.SuspendLayout();
             SuspendLayout();
             // 
             // exitToolStripMenuItem
             // 
+            exitToolStripMenuItem.ForeColor = Color.Red;
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             exitToolStripMenuItem.Size = new Size(180, 22);
             exitToolStripMenuItem.Text = "Exit";
@@ -53,9 +55,9 @@
             // 
             // trayMenu
             // 
-            trayMenu.Items.AddRange(new ToolStripItem[] { updateStripMenuItem1, settingsToolStripMenuItem, exitToolStripMenuItem });
+            trayMenu.Items.AddRange(new ToolStripItem[] { logsStripMenuItem1, settingsToolStripMenuItem, updateStripMenuItem1, exitToolStripMenuItem });
             trayMenu.Name = "trayMenu";
-            trayMenu.Size = new Size(181, 92);
+            trayMenu.Size = new Size(181, 114);
             trayMenu.Opening += trayMenu_Opening;
             // 
             // updateStripMenuItem1
@@ -69,6 +71,12 @@
             settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             settingsToolStripMenuItem.Size = new Size(180, 22);
             settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // logsStripMenuItem1
+            // 
+            logsStripMenuItem1.Name = "logsStripMenuItem1";
+            logsStripMenuItem1.Size = new Size(180, 22);
+            logsStripMenuItem1.Text = "Logs";
             // 
             // MainForm
             // 
@@ -101,4 +109,5 @@
         }
         private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripMenuItem updateStripMenuItem1;
+        private ToolStripMenuItem logsStripMenuItem1;
     } }

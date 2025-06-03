@@ -223,6 +223,15 @@ namespace Bimber {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Logs.
+        /// </summary>
+        internal static string Logs {
+            get {
+                return ResourceManager.GetString("Logs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Link copied to clipboard.
         /// </summary>
         internal static string Message {
