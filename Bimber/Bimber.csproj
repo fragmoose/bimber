@@ -6,10 +6,13 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-	  <Version>1.0.0.3</Version>
-	  <FileVersion>1.0.0.3</FileVersion>
-	  <AssemblyVersion>1.0.0.3</AssemblyVersion>
+	  <Version>1.0.0.4</Version>
+	  <FileVersion>1.0.0.4</FileVersion>
+	  <AssemblyVersion>1.0.0.4</AssemblyVersion>
 	  <ApplicationIcon>vodka.ico</ApplicationIcon>
+	  <SignAssembly>True</SignAssembly>
+	  <AssemblyOriginatorKeyFile>C:\Users\pdgro\source\repos\fragmoose\sgKey.snk</AssemblyOriginatorKeyFile>
+	  <DelaySign>False</DelaySign>
   </PropertyGroup>
 
   <ItemGroup>

@@ -98,9 +98,12 @@
             ClientSize = new Size(950, 244);
             Controls.Add(tableLayoutPanel1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "ViewLog";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Log viewer";
+            TopMost = true;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             panelPreview.ResumeLayout(false);
