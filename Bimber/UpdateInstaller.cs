@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -10,30 +11,26 @@ namespace Bimber
     {
         private readonly string _githubRepoUrl;
         private readonly string _tempDownloadPath;
+        private readonly string _appDirectory;
 
         public UpdateInstaller(string githubRepoUrl)
         {
             _githubRepoUrl = githubRepoUrl;
-            _tempDownloadPath = Path.Combine(Path.GetTempPath(), "MyAppUpdate");
+            _tempDownloadPath = Path.Combine(Path.GetTempPath(), "BimberUpdate");
+            _appDirectory = AppDomain.CurrentDomain.BaseDirectory;
         }
 
         public async Task DownloadAndInstallUpdateAsync()
         {
             try
             {
-                // Get download URL from GitHub
                 var downloadUrl = await GetLatestReleaseDownloadUrlAsync();
-
-                // Download the update
                 var downloadedFile = await DownloadUpdateAsync(downloadUrl);
-
-                // Install the update
-                InstallUpdate(downloadedFile);
+                await InstallUpdateAsync(downloadedFile);
             }
             catch (Exception ex)
             {
-                // Handle errors
-                throw new Exception("Update failed: " + ex.Message);
+                throw new Exception(Resources.UpdateFailed + ": " + ex.Message);
             }
         }
 
@@ -43,7 +40,7 @@ namespace Bimber
 
             using (var client = new WebClient())
             {
-                client.Headers.Add("User-Agent", "UpdateInstaller");
+                client.Headers.Add("User-Agent", "BimberUpdater");
                 var response = await client.DownloadStringTaskAsync(apiUrl);
 
                 dynamic releaseInfo = Newtonsoft.Json.JsonConvert.DeserializeObject(response);
@@ -69,22 +66,52 @@ namespace Bimber
             return filePath;
         }
 
-        private void InstallUpdate(string installerPath)
+        private async Task InstallUpdateAsync(string updatePackagePath)
         {
-            // For MSI or EXE installers
+            // Wypakuj pliki do folderu tymczasowego
+            var extractPath = Path.Combine(_tempDownloadPath, "extracted");
+            ZipFile.ExtractToDirectory(updatePackagePath, extractPath, true);
+
+            // Utwórz plik wsadowy do wykonania aktualizacji
+            var batchFilePath = Path.Combine(_tempDownloadPath, "update.bat");
+            await CreateUpdateBatchFile(batchFilePath, extractPath);
+
+            // Uruchom plik wsadowy
             var process = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = installerPath,
-                    UseShellExecute = true
+                    FileName = batchFilePath,
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    CreateNoWindow = true
                 }
             };
 
             process.Start();
 
-            // Close the current application
+            // Zamknij bieżącą aplikację
             Environment.Exit(0);
+        }
+
+        private async Task CreateUpdateBatchFile(string batchFilePath, string updateFilesPath)
+        {
+            var lines = new[]
+            {
+                "@echo off",
+                "echo Updating Bimber...",
+                "timeout /t 2 /nobreak >nul",
+                "",
+                "xcopy /y /e \"" + updateFilesPath + "\\*\" \"" + _appDirectory + "\"",
+                "",
+                "echo Running new version...",
+                "start \"\" \"" + Path.Combine(_appDirectory, "Bimber.exe") + "\"",
+                "",
+                "echo Removing temp files...",
+                "rmdir /s /q \"" + _tempDownloadPath + "\"",
+                "exit"
+            };
+
+            await File.WriteAllLinesAsync(batchFilePath, lines);
         }
     }
 }

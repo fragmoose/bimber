@@ -220,7 +220,7 @@
     <value>Local path</value>
   </data>
   <data name="ImageURL" xml:space="preserve">
-    <value>Image URL</value>
+    <value>Image URL (1x click copies, 2x opens)</value>
   </data>
   <data name="Viewlog" xml:space="preserve">
     <value>Log browser</value>
@@ -236,5 +236,8 @@
   </data>
   <data name="Logs" xml:space="preserve">
     <value>Logs</value>
+  </data>
+  <data name="UpdateFailed" xml:space="preserve">
+    <value>Update failed</value>
   </data>
 </root>

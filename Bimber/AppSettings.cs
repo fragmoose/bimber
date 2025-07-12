@@ -1,12 +1,13 @@
-﻿using Microsoft.Win32;
+﻿using Bimber.Properties;
+using Microsoft.Win32;
+using System;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using System;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Bimber
@@ -24,41 +25,53 @@ public class AppSettings
     public string ImageUploaderType { get; set; } = "ImageUploader";
     public bool SaveLocally { get; set; } = false;
     public string LocalSavePath { get; set; } = string.Empty;
+
     public void Save()
     {
-        Bimber.Properties.Settings.Default.ApiKey = ApiKey;
-        Bimber.Properties.Settings.Default.StartWithWindows = StartWithWindows;
-        Bimber.Properties.Settings.Default.Hotkey = Hotkey;
-        Bimber.Properties.Settings.Default.Language = Language;
-        Bimber.Properties.Settings.Default.ImageUploaderType = ImageUploaderType;
-        Bimber.Properties.Settings.Default.SaveLocally = SaveLocally;
-        Bimber.Properties.Settings.Default.LocalSavePath = LocalSavePath;
-        Bimber.Properties.Settings.Default.Save();
+        Settings.Default.ApiKey = ApiKey;
+        Settings.Default.StartWithWindows = StartWithWindows;
+        Settings.Default.Hotkey = Hotkey;
+        Settings.Default.Language = Language;
+        Settings.Default.ImageUploaderType = ImageUploaderType;
+        Settings.Default.SaveLocally = SaveLocally;
+        Settings.Default.LocalSavePath = LocalSavePath;
+        Settings.Default.Save();
     }
+
     public void SetStartup(bool enable)
     {
-        RegistryKey rk = Registry.CurrentUser.OpenSubKey(
-            "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true)!;
+        using (RegistryKey rk = Registry.CurrentUser.OpenSubKey(
+            "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
+        {
+            if (rk == null) return;
 
-        if (enable)
-        {
-            rk.SetValue("BackgroundApp", Application.ExecutablePath);
-        }
-        else
-        {
-            rk.DeleteValue("BackgroundApp", false);
+            if (enable)
+                rk.SetValue("Bimber", Application.ExecutablePath);
+            else
+                rk.DeleteValue("Bimber", false);
         }
     }
 
+    // Add this static Load method
     public static AppSettings Load()
     {
+        // Automatic settings upgrade for new versions
+        if (Settings.Default.UpgradeRequired)
+        {
+            Settings.Default.Upgrade();
+            Settings.Default.UpgradeRequired = false;
+            Settings.Default.Save();
+        }
+
         return new AppSettings
         {
-            ApiKey = Bimber.Properties.Settings.Default.ApiKey,
-            StartWithWindows = Bimber.Properties.Settings.Default.StartWithWindows,
-            Hotkey = Bimber.Properties.Settings.Default.Hotkey,
-            Language = Bimber.Properties.Settings.Default.Language,
-            ImageUploaderType = Bimber.Properties.Settings.Default.ImageUploaderType 
+            ApiKey = Settings.Default.ApiKey,
+            StartWithWindows = Settings.Default.StartWithWindows,
+            Hotkey = Settings.Default.Hotkey,
+            Language = Settings.Default.Language,
+            ImageUploaderType = Settings.Default.ImageUploaderType,
+            SaveLocally = Settings.Default.SaveLocally,
+            LocalSavePath = Settings.Default.LocalSavePath ?? string.Empty
         };
     }
 }

@@ -187,7 +187,7 @@ namespace Bimber {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Image URL.
+        ///   Looks up a localized string similar to Image URL (1x click copies, 2x opens).
         /// </summary>
         internal static string ImageURL {
             get {
@@ -381,6 +381,15 @@ namespace Bimber {
         internal static string updateCheck {
             get {
                 return ResourceManager.GetString("updateCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update failed.
+        /// </summary>
+        internal static string UpdateFailed {
+            get {
+                return ResourceManager.GetString("UpdateFailed", resourceCulture);
             }
         }
         

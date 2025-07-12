@@ -25,5 +25,6 @@ namespace Bimber
             
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;         
         }
+        
     }
 }

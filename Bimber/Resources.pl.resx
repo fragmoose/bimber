@@ -220,7 +220,7 @@
     <value>Ścieżka lokalna</value>
   </data>
   <data name="ImageURL" xml:space="preserve">
-    <value>Link do obrazka</value>
+    <value>Link do obrazka (1x klik kopiuje, 2x otwiera)</value>
   </data>
   <data name="Viewlog" xml:space="preserve">
     <value>Przeglądaj logi</value>
@@ -236,5 +236,8 @@
   </data>
   <data name="Logs" xml:space="preserve">
     <value>Logi</value>
+  </data>
+  <data name="UpdateFailed" xml:space="preserve">
+    <value>Aktualizacja nieudana</value>
   </data>
 </root>

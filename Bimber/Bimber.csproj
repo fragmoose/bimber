@@ -11,7 +11,7 @@
 	  <AssemblyVersion>1.0.0.4</AssemblyVersion>
 	  <ApplicationIcon>vodka.ico</ApplicationIcon>
 	  <SignAssembly>True</SignAssembly>
-	  <AssemblyOriginatorKeyFile>C:\Users\pdgro\source\repos\fragmoose\sgKey.snk</AssemblyOriginatorKeyFile>
+	  <AssemblyOriginatorKeyFile>F:\MyKeyPair.snk</AssemblyOriginatorKeyFile>
 	  <DelaySign>False</DelaySign>
   </PropertyGroup>
 

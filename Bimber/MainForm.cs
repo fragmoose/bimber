@@ -22,6 +22,7 @@ namespace Bimber
         private readonly UpdateInstaller _updateInstaller;
         private const string GitHubRepoUrl = "https://github.com/fragmoose/bimber";
         private readonly global::AppSettings settings;
+        private readonly LogViewerManager _logViewerManager = new LogViewerManager();
 
         // Hotkey API
         private const int HOTKEY_ID = 0x0001;
@@ -77,13 +78,12 @@ namespace Bimber
             settingsToolStripMenuItem.Text = Resources.Settings;
             exitToolStripMenuItem.Text = Resources.Exit;
         }
-        
+
         private void InitializeTrayMenu()
         {
-            var logViewer = new LogViewerManager();
             trayIcon.ContextMenuStrip = trayMenu;
             updateStripMenuItem1.Click += (s, e) => checkUpdate();
-            logsStripMenuItem1.Click += (s, e) => logViewer.ShowLogs(); 
+            logsStripMenuItem1.Click += (s, e) => _logViewerManager.ShowLogs();
             settingsToolStripMenuItem.Click += (s, e) => ShowSettings();
             exitToolStripMenuItem.Click += (s, e) => ExitApplication();
         }
@@ -229,11 +229,17 @@ namespace Bimber
                 finally
                 {
                     snippedImage.Dispose();
+
+                    // Refresh the log viewer if it's open
+                    if (!_logViewerManager.IsViewerDisposed)
+                    {
+                        _logViewerManager.ShowLogs(); // This will refresh the data
+                    }
                 }
             };
         }
 
-        
+
 
         private void LogToFile(string localPath, string imageUrl)
         {
@@ -320,7 +326,7 @@ namespace Bimber
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Update failed: {ex.Message}", "Error",
+                MessageBox.Show($"{Resources.UpdateFailed}: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
