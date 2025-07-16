@@ -142,5 +142,17 @@ namespace Bimber.Properties {
                 this["UpgradeRequired"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ApiKey2 {
+            get {
+                return ((string)(this["ApiKey2"]));
+            }
+            set {
+                this["ApiKey2"] = value;
+            }
+        }
     }
 }

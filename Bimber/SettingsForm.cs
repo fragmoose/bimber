@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Microsoft.VisualBasic;
+using Microsoft.Win32;
 using System.Diagnostics;
 using System.Net;
 using System.Reflection;
@@ -9,35 +10,56 @@ namespace Bimber
     public partial class SettingsForm : Form
     {
         private bool _suppressContextMenu = false;
-        private readonly global::AppSettings settings;
-        public SettingsForm(global::AppSettings currentSettings)
+        private readonly AppSettings settings;
+        private bool _isInitializing = true; 
+
+        public SettingsForm(AppSettings currentSettings)
         {
             InitializeComponent();
             settings = currentSettings;
+
+
+
             InitializeForm();
+            _isInitializing = false;
+
+
         }
-        
+
         private void InitializeForm()
         {
-            apiKeyTextBox.Text = settings.ApiKey;
+
+            comboBox1.SelectedIndexChanged -= comboBox1_SelectedIndexChanged;
+
+          
+            comboBox1.Items.AddRange(new object[] { "pixvid.org", "fivemanage.com" });
+
+           
+            bool isFivemanage = settings.ImageUploaderType == "ImageUploader2";
+
+            
+
+            apiKeyTextBox.Text = isFivemanage
+                ? settings.ApiKey2 ?? string.Empty
+                : settings.ApiKey ?? string.Empty;
+
+            
+            comboBox1.SelectedIndex = isFivemanage ? 1 : 0;
+
+            
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+
+           
+            languageComboBox.Items.AddRange(new object[] { "English", "Polski" });
+            languageComboBox.SelectedIndex = settings.Language == "pl" ? 1 : 0;
+
             startWithWindowsCheckBox.Checked = settings.StartWithWindows;
             hotkeyButton.Text = settings.Hotkey ?? Resources.SetHotkey;
             saveLocallyCheckBox.Checked = settings.SaveLocally;
             folderPathTextBox.Text = settings.LocalSavePath;
             folderPathTextBox.Enabled = settings.SaveLocally;
 
-            // Setup language combo
-            languageComboBox.Items.AddRange(new object[] { "English", "Polski" });
-            languageComboBox.SelectedIndex = settings.Language == "pl" ? 1 : 0;
-
-            // Setup image uploader type combo
-            comboBox1.Items.AddRange(new object[] { "pixvid.org", "fivemanage.com" });
-            comboBox1.SelectedIndex = settings.ImageUploaderType == "ImageUploader2" ? 1 : 0;
-
             var fileVersion = Assembly.GetEntryAssembly().GetName().Version.ToString();
-
-            // Localize form
-            var logViewer = new LogViewerManager();
             Text = Resources.Settings + " Bimber v" + fileVersion;
             apiKeyLabel.Text = Resources.ApiKeyLabel;
             startWithWindowsCheckBox.Text = Resources.StartWithWindows;
@@ -50,9 +72,8 @@ namespace Bimber
             browseFolderButton.Text = Resources.Browse;
             logLinkLabel.Text = Resources.LogLinkLabel;
             linkLabel1.Text = Resources.About;
-            logLinkLabel.Click += (s, e) => logViewer.ShowLogs();
-        }        
-        
+        }
+
         private void SaveBtn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(apiKeyTextBox.Text))
@@ -62,10 +83,22 @@ namespace Bimber
                 return;
             }
 
-            settings.ApiKey = apiKeyTextBox.Text.Trim();
+            string trimmedApiKey = apiKeyTextBox.Text.Trim();
+            bool isFivemanage = comboBox1.SelectedIndex == 1;
+
+           
+            if (isFivemanage)
+            {
+                settings.ApiKey2 = trimmedApiKey;
+            }
+            else
+            {
+                settings.ApiKey = trimmedApiKey;
+            }
+
             settings.StartWithWindows = startWithWindowsCheckBox.Checked;
             settings.Language = languageComboBox.SelectedIndex == 1 ? "pl" : "en";
-            settings.ImageUploaderType = comboBox1.SelectedIndex == 1 ? "ImageUploader2" : "ImageUploader";
+            settings.ImageUploaderType = isFivemanage ? "ImageUploader2" : "ImageUploader";
             settings.SaveLocally = saveLocallyCheckBox.Checked;
             settings.LocalSavePath = folderPathTextBox.Text;
             settings.Hotkey = hotkeyButton.Text != Resources.SetHotkey ? hotkeyButton.Text : null;
@@ -243,16 +276,23 @@ namespace Bimber
 
             return string.Join("+", keyStrings);
         }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            settings.ImageUploaderType = comboBox1.SelectedIndex == 1 ? "ImageUploader2" : "ImageUploader";
-        }
-
         private void saveLocallyCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             folderPathTextBox.Enabled = saveLocallyCheckBox.Checked;
             browseFolderButton.Enabled = saveLocallyCheckBox.Checked;
+        }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_isInitializing || comboBox1.SelectedIndex < 0)
+                return;
+
+            bool isFivemanage = comboBox1.SelectedIndex == 1;
+
+            apiKeyTextBox.Text = isFivemanage
+                ? settings.ApiKey2 ?? string.Empty
+                : settings.ApiKey ?? string.Empty;
+
+            settings.ImageUploaderType = isFivemanage ? "ImageUploader2" : "ImageUploader";
         }
 
         private void browseFolderButton_Click(object sender, EventArgs e)

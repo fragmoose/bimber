@@ -11,10 +11,10 @@ namespace Bimber
         {
             InitializeComponent();
 
-            // Fixed string formatting (removed curly braces from Resources access)
+    
             this.Text = string.Format(Resources.About, AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = $"{Resources.Version} {AssemblyVersion}"; // Using string interpolation
+            this.labelVersion.Text = $"{Resources.Version} {AssemblyVersion}"; 
    
             this.author.Text = $"{Resources.author} fragmoose";
         }

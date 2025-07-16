@@ -16,7 +16,7 @@ namespace Bimber
             }
             else
             {
-                // Send message to existing instance
+                
             }
         }
     }

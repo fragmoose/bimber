@@ -65,11 +65,11 @@ namespace Bimber
 
         public void ShowLogs()
         {
-            // Create a new instance if the form was disposed
+            
             if (_logViewer == null || _logViewer.IsDisposed)
             {
                 _logViewer = new ViewLog();
-                InitializeViewer(); // Re-initialize the form
+                InitializeViewer(); 
             }
 
             string logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log.txt");
@@ -103,23 +103,23 @@ namespace Bimber
             string[] logLines = File.ReadAllLines(filePath);
             Array.Reverse(logLines);
 
-            // Calculate column widths (30%, 30%, 40%)
+           
             int totalWidth = _logViewer.dataGridView1.ClientSize.Width;
             int timestampWidth = (int)(totalWidth * 0.30);
             int localPathWidth = (int)(totalWidth * 0.30);
             int imageUrlWidth = (int)(totalWidth * 0.40);
 
-            // Set column widths
+           
             _logViewer.dataGridView1.Columns["Timestamp"].Width = timestampWidth;
             _logViewer.dataGridView1.Columns["LocalPath"].Width = localPathWidth;
             _logViewer.dataGridView1.Columns["ImageURL"].Width = imageUrlWidth;
 
-            // Disable auto-sizing to enforce fixed widths
+            
             _logViewer.dataGridView1.Columns["Timestamp"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             _logViewer.dataGridView1.Columns["LocalPath"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
             _logViewer.dataGridView1.Columns["ImageURL"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
 
-            // Load data
+           
             foreach (var line in logLines)
             {
                 var parts = line.Split(';');
@@ -133,7 +133,7 @@ namespace Bimber
                 }
             }
 
-            // Style the ImageURL column (keep your existing styling)
+            
             _logViewer.dataGridView1.Columns["ImageURL"].DefaultCellStyle.ForeColor = Color.Blue;
             _logViewer.dataGridView1.Columns["ImageURL"].DefaultCellStyle.Font =
                 new Font(_logViewer.dataGridView1.Font, FontStyle.Underline);
@@ -192,7 +192,7 @@ namespace Bimber
             };
             _logViewer.FormClosed += (s, ev) =>
             {
-                // Clear references to avoid accessing disposed objects
+                
                 _logViewer.pictureBox1?.Image?.Dispose();
                 _copyToolTip.Dispose();
             };
@@ -306,7 +306,7 @@ namespace Bimber
         {
             try
             {
-                // Check if the form or pictureBox is disposed
+             
                 if (_logViewer.IsDisposed || _logViewer.pictureBox1.IsDisposed)
                     return;
 
@@ -315,7 +315,6 @@ namespace Bimber
                     client.Timeout = TimeSpan.FromSeconds(10);
                     byte[] imageBytes = await client.GetByteArrayAsync(imageUrl);
 
-                    // Check again after await
                     if (_logViewer.IsDisposed || _logViewer.pictureBox1.IsDisposed)
                         return;
 
@@ -323,14 +322,13 @@ namespace Bimber
                     {
                         var newImage = Image.FromStream(ms);
 
-                        // More disposal checks
                         if (_logViewer.IsDisposed || _logViewer.pictureBox1.IsDisposed)
                         {
                             newImage.Dispose();
                             return;
                         }
 
-                        // Safe to update the UI
+                     
                         _logViewer.Invoke((MethodInvoker)delegate {
                             if (!_logViewer.IsDisposed && !_logViewer.pictureBox1.IsDisposed)
                             {

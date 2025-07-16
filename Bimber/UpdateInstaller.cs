@@ -68,15 +68,14 @@ namespace Bimber
 
         private async Task InstallUpdateAsync(string updatePackagePath)
         {
-            // Wypakuj pliki do folderu tymczasowego
+          
             var extractPath = Path.Combine(_tempDownloadPath, "extracted");
             ZipFile.ExtractToDirectory(updatePackagePath, extractPath, true);
 
-            // Utwórz plik wsadowy do wykonania aktualizacji
+           
             var batchFilePath = Path.Combine(_tempDownloadPath, "update.bat");
             await CreateUpdateBatchFile(batchFilePath, extractPath);
 
-            // Uruchom plik wsadowy
             var process = new Process
             {
                 StartInfo = new ProcessStartInfo
@@ -89,7 +88,7 @@ namespace Bimber
 
             process.Start();
 
-            // Zamknij bieżącą aplikację
+           
             Environment.Exit(0);
         }
 

@@ -6,9 +6,9 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-	  <Version>1.0.0.4</Version>
-	  <FileVersion>1.0.0.4</FileVersion>
-	  <AssemblyVersion>1.0.0.4</AssemblyVersion>
+	  <Version>1.0.0.6</Version>
+	  <FileVersion>1.0.0.6</FileVersion>
+	  <AssemblyVersion>1.0.0.6</AssemblyVersion>
 	  <ApplicationIcon>vodka.ico</ApplicationIcon>
 	  <SignAssembly>True</SignAssembly>
 	  <AssemblyOriginatorKeyFile>F:\MyKeyPair.snk</AssemblyOriginatorKeyFile>

@@ -9,10 +9,10 @@ namespace Bimber
 {
     public class ImageUploader2 : IImageUploader
     {
-        private readonly global::AppSettings settings;
+        private readonly AppSettings settings;
         private readonly HttpClient httpClient;
 
-        public ImageUploader2(global::AppSettings settings, HttpClient httpClient = null)
+        public ImageUploader2(AppSettings settings, HttpClient httpClient = null)
         {
             this.settings = settings ?? throw new ArgumentNullException(nameof(settings));
             this.httpClient = httpClient ?? new HttpClient();
@@ -27,13 +27,13 @@ namespace Bimber
 
             using (var content = new MultipartFormDataContent())
             {
-                // Add image
+                
                 var imageContent = new StreamContent(imageStream);
                 imageContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
                 content.Add(imageContent, "file", fileName);
 
                 var request = new HttpRequestMessage(HttpMethod.Post, "https://fmapi.net/api/v2/image");
-                request.Headers.Authorization = new AuthenticationHeaderValue(settings.ApiKey);
+                request.Headers.Authorization = new AuthenticationHeaderValue(settings.ApiKey2);
                 request.Content = content;
 
                 var response = await httpClient.SendAsync(request);

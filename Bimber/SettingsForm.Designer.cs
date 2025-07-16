@@ -21,19 +21,7 @@
         }
 
         #region Windows Form Designer generated code
-        private void SettingsForm_Load(object sender, EventArgs e)
-        {
-            // Initialize form controls with current settings
-            apiKeyTextBox.Text = settings.ApiKey;
-            startWithWindowsCheckBox.Checked = settings.StartWithWindows;
-
-            // Set language selection
-            languageComboBox.SelectedIndex = settings.Language == "pl" ? 1 : 0;
-
-            // Initialize hotkey display
-            hotkeyButton.Text = string.IsNullOrEmpty(settings.Hotkey) ?
-                "None" : settings.Hotkey;
-        }
+        
         /// <summary>
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
@@ -256,7 +244,7 @@
             MinimizeBox = false;
             Name = "SettingsForm";
             Text = "Settings";
-            Load += SettingsForm_Load;
+
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();

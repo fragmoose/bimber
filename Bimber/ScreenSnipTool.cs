@@ -22,7 +22,7 @@ namespace Bimber
             overlayForm = new Form
             {
                 FormBorderStyle = FormBorderStyle.None,
-                WindowState = FormWindowState.Normal, // Not maximized
+                WindowState = FormWindowState.Normal, 
                 TopMost = true,
                 ShowInTaskbar = false,
                 Cursor = Cursors.Cross,
@@ -39,7 +39,7 @@ namespace Bimber
             overlayForm.KeyDown += OverlayForm_KeyDown!;
             overlayForm.Paint += OverlayForm_Paint!;
 
-            // Capture each screen individually first
+            
             screenBitmap = CaptureAllScreens();
 
             overlayForm.Show();
@@ -60,7 +60,7 @@ namespace Bimber
                             screenG.CopyFromScreen(screen.Bounds.Location, Point.Empty, screen.Bounds.Size);
                         }
 
-                        // Draw each screen at its correct virtual position
+                        
                         g.DrawImage(
                             screenBmp,
                             screen.Bounds.X - virtualScreenBounds.X,
@@ -124,7 +124,7 @@ namespace Bimber
 
                 if (selectionRect.Width > 10 && selectionRect.Height > 10)
                 {
-                    // Ensure the selection is within bounds
+                    
                     selectionRect.Intersect(new Rectangle(0, 0, screenBitmap.Width, screenBitmap.Height));
 
                     if (selectionRect.Width > 0 && selectionRect.Height > 0)

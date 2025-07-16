@@ -9,10 +9,10 @@ namespace Bimber
 {
     public class ImageUploader : IImageUploader
     {
-        private readonly global::AppSettings settings;
+        private readonly AppSettings settings;
         private readonly HttpClient httpClient;
 
-        public ImageUploader(global::AppSettings settings, HttpClient httpClient = null!)
+        public ImageUploader(AppSettings settings, HttpClient httpClient = null!)
         {
             this.settings = settings ?? throw new ArgumentNullException(nameof(settings));
             this.httpClient = httpClient ?? new HttpClient();

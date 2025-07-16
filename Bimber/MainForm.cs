@@ -21,10 +21,10 @@ namespace Bimber
         private readonly UpdateChecker _updateChecker;
         private readonly UpdateInstaller _updateInstaller;
         private const string GitHubRepoUrl = "https://github.com/fragmoose/bimber";
-        private readonly global::AppSettings settings;
+        private readonly AppSettings settings;
         private readonly LogViewerManager _logViewerManager = new LogViewerManager();
 
-        // Hotkey API
+       
         private const int HOTKEY_ID = 0x0001;
         private const uint MOD_NONE = 0x0000;
         private const uint MOD_ALT = 0x0001;
@@ -44,7 +44,7 @@ namespace Bimber
             _updateChecker = new UpdateChecker(GitHubRepoUrl);
             _updateInstaller = new UpdateInstaller(GitHubRepoUrl);
             InitializeComponent();
-            settings = global::AppSettings.Load();
+            settings = AppSettings.Load();
             InitializeLanguage();
             InitializeTrayMenu();
             RegisterHotkey();
@@ -114,7 +114,7 @@ namespace Bimber
 
         private void RegisterHotkey()
         {
-            // Unregister existing hotkey first
+        
             UnregisterHotKey(this.Handle, HOTKEY_ID);
 
             if (!string.IsNullOrEmpty(settings.Hotkey))
@@ -230,10 +230,10 @@ namespace Bimber
                 {
                     snippedImage.Dispose();
 
-                    // Refresh the log viewer if it's open
+                    
                     if (!_logViewerManager.IsViewerDisposed)
                     {
-                        _logViewerManager.ShowLogs(); // This will refresh the data
+                        _logViewerManager.ShowLogs(); 
                     }
                 }
             };
@@ -271,7 +271,7 @@ namespace Bimber
             }
             catch
             {
-                // Silent fail
+                
             }
         }
 

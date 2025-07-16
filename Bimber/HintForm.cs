@@ -16,34 +16,34 @@ namespace Bimber
         {
             InitializeComponent();
 
-            // Set form properties
+           
             this.FormBorderStyle = FormBorderStyle.None;
             this.ShowInTaskbar = false;
             this.TopMost = true;
             this.BackColor = Color.LightYellow;
             this.Opacity = 0.9;
 
-            // Create a label for the text
+            
             Label hintLabel = new Label();
             hintLabel.Text = hintText;
             hintLabel.AutoSize = true;
             hintLabel.Padding = new Padding(5);
             this.Controls.Add(hintLabel);
 
-            // Size the form to fit the label
+            
             this.ClientSize = hintLabel.Size;
 
-            // Position the form - ADD THIS LINE
+            
             PositionForm();
         }
 
-        // Add this method to position the form
+ 
         private void PositionForm()
         {
             Rectangle workingArea = Screen.GetWorkingArea(this);
             this.Location = new Point(
-                workingArea.Right - this.Width - 10,  // 10 pixels from right
-                workingArea.Bottom - this.Height - 10 // 10 pixels from bottom
+                workingArea.Right - this.Width - 10,  
+                workingArea.Bottom - this.Height - 10 
             );
         }
         private void HintForm_Load(object sender, EventArgs e)

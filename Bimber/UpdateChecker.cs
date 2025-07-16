@@ -15,7 +15,7 @@ namespace Bimber
         public UpdateChecker(string githubRepoUrl)
         {
             _githubRepoUrl = githubRepoUrl;
-            // Use FileVersion instead of AssemblyVersion
+            
             _currentVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion;
         }
 
@@ -28,7 +28,7 @@ namespace Bimber
                 if (Version.TryParse(_currentVersion, out Version current) &&
                     Version.TryParse(latestVersion, out Version latest))
                 {
-                    return latest > current; // True if newer version exists
+                    return latest > current; 
                 }
                 return false;
             }
@@ -47,10 +47,10 @@ namespace Bimber
                 client.DefaultRequestHeaders.UserAgent.ParseAdd("UpdateChecker");
                 string response = await client.GetStringAsync(apiUrl);
 
-                // Parse JSON and handle "v1.0.0.3" or "1.0.0.3" format
+                
                 JObject releaseInfo = JObject.Parse(response);
                 string tagName = releaseInfo["tag_name"].ToString();
-                return tagName.StartsWith("v") ? tagName.Substring(1) : tagName; // Remove "v" prefix
+                return tagName.StartsWith("v") ? tagName.Substring(1) : tagName; 
             }
         }
     }
